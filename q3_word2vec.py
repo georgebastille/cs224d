@@ -104,9 +104,9 @@ def negSamplingCostAndGradient(predicted, target, outputVectors, dataset,
 
     cost = -np.log(siguo) - np.sum(np.log(sigk))
     gradPred = (siguo - 1) * uo - np.sum((sigk - 1).reshape(K, 1) * kvec, axis=0)
-    grad = np.zeros_like(outputVectors)
+    grad = np.zeros_like(outputVectors.shape)
     grad[target] = (siguo - 1) * predicted
-    grad[kidxvec] = -(sigk - 1) * predicted 
+    grad[kidxvec] = -(sigk - 1) * predicted
     ### END YOUR CODE
 
     return cost, gradPred, grad
@@ -139,6 +139,11 @@ def skipgram(currentWord, C, contextWords, tokens, inputVectors, outputVectors,
     # assignment!
 
     ### YOUR CODE HERE
+    vc = inputVectors[tokens[currentWord]]
+
+    for word in contextWords:
+        uo = outputVectors[tokens[word]]
+
     raise NotImplementedError
     ### END YOUR CODE
 
